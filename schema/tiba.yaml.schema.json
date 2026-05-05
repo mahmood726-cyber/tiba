@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/mahmood726-cyber/tiba/blob/main/schema/tiba.yaml.schema.json",
+  "title": "Tiba Federation Manifest",
+  "description": "Manifest dropped at the root of any repo affiliated with the Tiba framework.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "layer",
+    "status",
+    "owning_repo",
+    "pages_url",
+    "headline_metric",
+    "contact",
+    "last_verified"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": { "type": "integer", "const": 1 },
+    "layer": {
+      "type": "string",
+      "enum": [
+        "discovery",
+        "quality-gate",
+        "equity",
+        "publishing",
+        "training",
+        "workforce",
+        "living-updates",
+        "verification-ui"
+      ]
+    },
+    "status": { "type": "string", "enum": ["operational", "roadmap"] },
+    "owning_repo": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"
+    },
+    "pages_url": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https://"
+    },
+    "headline_metric": {
+      "type": "object",
+      "required": ["label", "value", "source"],
+      "additionalProperties": false,
+      "properties": {
+        "label": { "type": "string", "minLength": 1, "maxLength": 200 },
+        "value": { "type": "string", "minLength": 1, "maxLength": 100 },
+        "ci_or_qualifier": { "type": "string", "maxLength": 200 },
+        "source": { "type": "string", "minLength": 1, "maxLength": 200 }
+      }
+    },
+    "contact": {
+      "type": "object",
+      "required": ["steward"],
+      "additionalProperties": false,
+      "properties": {
+        "steward": { "type": "string", "minLength": 1 },
+        "cohort": {
+          "anyOf": [
+            { "type": "null" },
+            { "type": "string", "enum": ["makerere", "saarc"] }
+          ]
+        }
+      }
+    },
+    "last_verified": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    }
+  }
+}
