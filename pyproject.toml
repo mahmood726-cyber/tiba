@@ -21,7 +21,7 @@ dev = [
 ]
 
 [project.scripts]
-tiba-build-index = "site.generator.build_index:main"
+tiba-build-index = "tiba.generator.build_index:main"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
@@ -32,4 +32,4 @@ markers = [
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["site*"]
+include = ["tiba*"]
