@@ -109,3 +109,11 @@ def test_hook_mode_uses_ls_tree_not_diff_cached(tmp_path: Path, monkeypatch) -> 
     assert "ls-tree" in cmd, f"hook mode must use git ls-tree, got: {cmd}"
     assert "--cached" not in cmd, f"hook mode must NOT use --cached: {cmd}"
     assert rc == 0  # empty file list -> no violations
+
+
+def test_index_template_is_allowlisted(tmp_path: Path) -> None:
+    d = tmp_path / "site" / "templates"
+    d.mkdir(parents=True)
+    f = d / "index.html.j2"
+    f.write_text("Not affiliated with the Cochrane Collaboration.\n", encoding="utf-8")
+    assert find_violations([f], repo_root=tmp_path) == []

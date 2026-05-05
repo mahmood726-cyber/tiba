@@ -1,0 +1,62 @@
+{# site/templates/index.html.j2 — Tiba index page (self-contained, no CDN) #}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tiba — Pan-African Living-Evidence Federation</title>
+  <link rel="stylesheet" href="assets/tiba.css" />
+  <meta property="og:title" content="Tiba — Pan-African Living-Evidence Federation" />
+  <meta property="og:description" content="African-led, federated evidence-synthesis ecosystem. v0.1.0 framework declaration." />
+</head>
+<body>
+  <header class="hero">
+    <h1>Tiba</h1>
+    <p class="tagline">Pan-African, African-led, living-evidence ecosystem.</p>
+    <p class="version">v{{ version }} · generated {{ generated_at }}</p>
+  </header>
+
+  <section class="layers operational">
+    <h2>Operational</h2>
+    {% for layer, items in operational.items() %}
+    <div class="layer" data-layer="{{ layer }}">
+      <h3>{{ layer | replace('-', ' ') | title }}</h3>
+      {% for v in items %}
+      {% set m = v.fetch.manifest %}
+      <article class="card">
+        <h4><a href="{{ m.pages_url }}">{{ m.owning_repo }}</a></h4>
+        <p class="metric"><strong>{{ m.headline_metric.value }}</strong> — {{ m.headline_metric.label }}</p>
+        {% if m.headline_metric.ci_or_qualifier %}<p class="qualifier">{{ m.headline_metric.ci_or_qualifier }}</p>{% endif %}
+        <p class="source">{{ m.headline_metric.source }} · verified {{ m.last_verified }} · HTTP {{ v.pages_status }}</p>
+      </article>
+      {% endfor %}
+    </div>
+    {% endfor %}
+  </section>
+
+  <section class="layers roadmap">
+    <h2>Roadmap (v0.2+)</h2>
+    {% for layer, items in roadmap.items() %}
+    <div class="layer roadmap-layer" data-layer="{{ layer }}">
+      <h3>{{ layer | replace('-', ' ') | title }}</h3>
+      {% for v in items %}
+      {% set m = v.fetch.manifest %}
+      <article class="card roadmap-card">
+        <h4>{{ m.owning_repo }}</h4>
+        <p class="metric">{{ m.headline_metric.label }}</p>
+      </article>
+      {% endfor %}
+    </div>
+    {% endfor %}
+  </section>
+
+  <footer>
+    <p>
+      <a href="https://github.com/mahmood726-cyber/tiba">Source</a> ·
+      <a href="https://github.com/mahmood726-cyber/tiba/blob/main/MANIFESTO.md">Manifesto</a> ·
+      MIT licensed
+    </p>
+    <p class="trademark">Not affiliated with the Cochrane Collaboration.</p>
+  </footer>
+</body>
+</html>

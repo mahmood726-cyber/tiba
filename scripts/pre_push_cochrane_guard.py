@@ -52,6 +52,9 @@ def _is_allowlisted(path: Path, repo_root: Path) -> bool:
     # README.md: contains the project-level trademark disclaimer.
     if len(parts) == 1 and parts[0] == "README.md":
         return True
+    # Jinja2 templates: site/templates/** — only "Not affiliated" disclaimer in footer.
+    if len(parts) >= 2 and parts[0] == "site" and parts[1] == "templates":
+        return True
     return False
 
 
