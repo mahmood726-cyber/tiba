@@ -58,6 +58,10 @@ def _is_allowlisted(path: Path, repo_root: Path) -> bool:
     # Jinja2 templates: site/templates/** — only "Not affiliated" disclaimer in footer.
     if len(parts) >= 2 and parts[0] == "site" and parts[1] == "templates":
         return True
+    # Generated index page: site/index.html — rendered from the template; contains
+    # the "Not affiliated with the Cochrane Collaboration" footer verbatim.
+    if len(parts) == 2 and parts[0] == "site" and parts[1] == "index.html":
+        return True
     return False
 
 
