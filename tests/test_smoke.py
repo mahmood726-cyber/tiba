@@ -1,3 +1,4 @@
+# tests/test_smoke.py
 """Smoke test: verifies test harness wiring and repo layout invariants."""
 from pathlib import Path
 
