@@ -49,6 +49,9 @@ def _is_allowlisted(path: Path, repo_root: Path) -> bool:
     # Renderer test suite: asserts the template's non-affiliation disclaimer text.
     if len(parts) == 2 and parts[0] == "tests" and parts[1] == "test_renderer.py":
         return True
+    # Orchestrator integration test: asserts the rendered HTML disclaimer text.
+    if len(parts) == 2 and parts[0] == "tests" and parts[1] == "test_build_index.py":
+        return True
     # Internal design and implementation docs (docs/superpowers/**): trademark posture sections.
     if len(parts) >= 2 and parts[0] == "docs" and parts[1] == "superpowers":
         return True

@@ -135,3 +135,11 @@ def test_generated_index_html_is_allowlisted(tmp_path: Path) -> None:
     f = d / "index.html"
     f.write_text("Not affiliated with the Cochrane Collaboration.\n", encoding="utf-8")
     assert find_violations([f], repo_root=tmp_path) == []
+
+
+def test_build_index_test_file_is_allowlisted(tmp_path: Path) -> None:
+    tests_dir = tmp_path / "tests"
+    tests_dir.mkdir()
+    f = tests_dir / "test_build_index.py"
+    f.write_text('assert "Not affiliated with the Cochrane Collaboration" in html\n', encoding="utf-8")
+    assert find_violations([f], repo_root=tmp_path) == []
