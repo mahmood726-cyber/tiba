@@ -1,0 +1,12 @@
+# federation.yaml — curated list of Tiba-affiliated repos for v0.1.0.
+# v0.2 will replace this with auto-discovery via GitHub Search API.
+schema_version: 1
+repos:
+  - owner: mahmood726-cyber
+    repo: pactr-hiddenness-atlas
+  - owner: mahmood726-cyber
+    repo: arac
+  - owner: mahmood726-cyber
+    repo: repro-floor-atlas
+  - owner: mahmood726-cyber
+    repo: synthesis-courses
