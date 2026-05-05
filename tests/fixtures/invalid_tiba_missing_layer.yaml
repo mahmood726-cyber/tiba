@@ -1,0 +1,11 @@
+schema_version: 1
+status: operational
+owning_repo: mahmood726-cyber/pactr-hiddenness-atlas
+pages_url: https://mahmood726-cyber.github.io/pactr-hiddenness-atlas/
+headline_metric:
+  label: "x"
+  value: "y"
+  source: "z"
+contact:
+  steward: mahmood726-cyber
+last_verified: "2026-05-05"

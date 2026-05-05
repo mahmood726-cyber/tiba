@@ -1,0 +1,13 @@
+schema_version: 1
+layer: synthesis-courses-but-not-an-enum
+status: operational
+owning_repo: mahmood726-cyber/synthesis-courses
+pages_url: https://mahmood726-cyber.github.io/synthesis-courses/
+headline_metric:
+  label: "Courses live"
+  value: "26 × 12 languages"
+  source: "synthesis-courses Pages"
+contact:
+  steward: mahmood726-cyber
+  cohort: makerere
+last_verified: "2026-05-05"

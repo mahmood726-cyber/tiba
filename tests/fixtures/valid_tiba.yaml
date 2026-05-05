@@ -1,0 +1,14 @@
+schema_version: 1
+layer: discovery
+status: operational
+owning_repo: mahmood726-cyber/pactr-hiddenness-atlas
+pages_url: https://mahmood726-cyber.github.io/pactr-hiddenness-atlas/
+headline_metric:
+  label: "NCT-bridge sensitivity for PACTR pubs"
+  value: "6.2%"
+  ci_or_qualifier: "[3.4%, 10.4%], n=30 blinded audit"
+  source: "pactr-hiddenness-atlas v0.1.0"
+contact:
+  steward: mahmood726-cyber
+  cohort: null
+last_verified: "2026-05-05"
