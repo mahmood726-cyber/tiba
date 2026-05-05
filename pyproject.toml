@@ -1,0 +1,35 @@
+[project]
+name = "tiba"
+version = "0.1.0"
+description = "Tiba — Pan-African, African-led, living-evidence ecosystem (framework declaration)"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "mahmood726-cyber" }]
+dependencies = [
+    "pyyaml>=6.0",
+    "jsonschema>=4.0",
+    "jinja2>=3.1",
+    "requests>=2.31",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=4.1",
+    "responses>=0.24",
+]
+
+[project.scripts]
+tiba-build-index = "site.generator.build_index:main"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q --strict-markers"
+markers = [
+    "network: tests that hit the real internet (skip in CI offline mode)",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["site*"]
