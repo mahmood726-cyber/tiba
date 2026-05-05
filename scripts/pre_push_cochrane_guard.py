@@ -58,11 +58,15 @@ def find_violations(
 
 def main(argv: list[str]) -> int:
     if len(argv) < 2:
-        # Hook mode: scan staged files via git
+        # Hook mode (pre-push): scan ALL tracked files at HEAD.
+        # Pre-push semantics: the staging area is irrelevant; we must check what's
+        # actually being shipped. ls-tree is bulletproof for small repos (<1s) and
+        # avoids the edge cases of pre-push stdin parsing (first push, force push,
+        # branch deletion). Trade-off: scans the whole tree on every push.
         import subprocess
 
         result = subprocess.run(
-            ["git", "diff", "--cached", "--name-only", "--diff-filter=ACM"],
+            ["git", "ls-tree", "-r", "--name-only", "HEAD"],
             capture_output=True,
             text=True,
             check=True,
@@ -74,7 +78,7 @@ def main(argv: list[str]) -> int:
     violations = find_violations(files)
     if not violations:
         return 0
-    print("TIBA TRADEMARK GUARD — 'Cochrane' found in non-allowlisted files:", file=sys.stderr)
+    print("TIBA TRADEMARK GUARD - 'Cochrane' found in non-allowlisted files:", file=sys.stderr)
     for v in violations:
         print(f"  {v.path}:{v.line_no}  {v.matched_text!r}", file=sys.stderr)
     print(

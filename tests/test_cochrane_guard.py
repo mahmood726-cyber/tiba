@@ -3,7 +3,7 @@ from pathlib import Path
 
 import pytest
 
-from scripts.pre_push_cochrane_guard import find_violations
+from scripts.pre_push_cochrane_guard import find_violations, main
 
 
 def test_clean_text_passes(tmp_path: Path) -> None:
@@ -42,3 +42,26 @@ def test_outside_papers_dir_still_blocks(tmp_path: Path) -> None:
     f = other_dir / "index.html"
     f.write_text("Cochrane reviews are great\n", encoding="utf-8")
     assert len(find_violations([f], repo_root=tmp_path)) == 1
+
+
+def test_hook_mode_uses_ls_tree_not_diff_cached(tmp_path: Path, monkeypatch) -> None:
+    """Regression: hook mode must use git ls-tree HEAD (pre-push semantics),
+    not git diff --cached (pre-commit semantics)."""
+    import subprocess
+
+    captured: list[list[str]] = []
+
+    def fake_run(cmd, **kwargs):
+        captured.append(list(cmd))
+        return subprocess.CompletedProcess(
+            args=cmd, returncode=0, stdout="", stderr=""
+        )
+
+    monkeypatch.setattr(subprocess, "run", fake_run)
+
+    rc = main([])
+    assert captured, "hook mode should have invoked subprocess.run"
+    cmd = captured[0]
+    assert "ls-tree" in cmd, f"hook mode must use git ls-tree, got: {cmd}"
+    assert "--cached" not in cmd, f"hook mode must NOT use --cached: {cmd}"
+    assert rc == 0  # empty file list -> no violations
