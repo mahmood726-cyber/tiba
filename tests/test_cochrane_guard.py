@@ -44,6 +44,50 @@ def test_outside_papers_dir_still_blocks(tmp_path: Path) -> None:
     assert len(find_violations([f], repo_root=tmp_path)) == 1
 
 
+def test_manifesto_disclaimer_is_allowlisted(tmp_path: Path) -> None:
+    f = tmp_path / "MANIFESTO.md"
+    f.write_text("Not affiliated with the Cochrane Collaboration.\n", encoding="utf-8")
+    assert find_violations([f], repo_root=tmp_path) == []
+
+
+def test_guard_source_is_allowlisted(tmp_path: Path) -> None:
+    scripts = tmp_path / "scripts"
+    scripts.mkdir()
+    f = scripts / "pre_push_cochrane_guard.py"
+    f.write_text("PATTERN = re.compile(r'cochrane', re.IGNORECASE)\n", encoding="utf-8")
+    assert find_violations([f], repo_root=tmp_path) == []
+
+
+def test_guard_test_file_is_allowlisted(tmp_path: Path) -> None:
+    tests_dir = tmp_path / "tests"
+    tests_dir.mkdir()
+    f = tests_dir / "test_cochrane_guard.py"
+    f.write_text("f.write_text('Cochrane review\\n')\n", encoding="utf-8")
+    assert find_violations([f], repo_root=tmp_path) == []
+
+
+def test_install_hook_script_is_allowlisted(tmp_path: Path) -> None:
+    scripts = tmp_path / "scripts"
+    scripts.mkdir()
+    f = scripts / "install_pre_push_hook.ps1"
+    f.write_text("# Tiba Cochrane-trademark guard\n", encoding="utf-8")
+    assert find_violations([f], repo_root=tmp_path) == []
+
+
+def test_superpowers_docs_are_allowlisted(tmp_path: Path) -> None:
+    docs_dir = tmp_path / "docs" / "superpowers" / "specs"
+    docs_dir.mkdir(parents=True)
+    f = docs_dir / "2026-05-05-tiba-design.md"
+    f.write_text("Cochrane trademark posture: independent organisation.\n", encoding="utf-8")
+    assert find_violations([f], repo_root=tmp_path) == []
+
+
+def test_readme_trademark_section_is_allowlisted(tmp_path: Path) -> None:
+    f = tmp_path / "README.md"
+    f.write_text("**Not affiliated with the Cochrane Collaboration.**\n", encoding="utf-8")
+    assert find_violations([f], repo_root=tmp_path) == []
+
+
 def test_hook_mode_uses_ls_tree_not_diff_cached(tmp_path: Path, monkeypatch) -> None:
     """Regression: hook mode must use git ls-tree HEAD (pre-push semantics),
     not git diff --cached (pre-commit semantics)."""
