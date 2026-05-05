@@ -1,0 +1,44 @@
+"""Tests for the Cochrane-trademark pre-push guard (R1 mitigation, spec §8)."""
+from pathlib import Path
+
+import pytest
+
+from scripts.pre_push_cochrane_guard import find_violations
+
+
+def test_clean_text_passes(tmp_path: Path) -> None:
+    f = tmp_path / "README.md"
+    f.write_text("Tiba is an evidence synthesis framework.\n", encoding="utf-8")
+    assert find_violations([f]) == []
+
+
+def test_cochrane_in_readme_violates(tmp_path: Path) -> None:
+    f = tmp_path / "README.md"
+    f.write_text("Tiba is the African Cochrane.\n", encoding="utf-8")
+    violations = find_violations([f])
+    assert len(violations) == 1
+    assert violations[0].path == f
+    assert violations[0].line_no == 1
+    assert "cochrane" in violations[0].matched_text.lower()
+
+
+def test_case_insensitive(tmp_path: Path) -> None:
+    f = tmp_path / "README.md"
+    f.write_text("See COCHRANE handbook.\n", encoding="utf-8")
+    assert len(find_violations([f])) == 1
+
+
+def test_paper_citation_is_allowlisted(tmp_path: Path) -> None:
+    papers_dir = tmp_path / "docs" / "papers" / "diagnostic"
+    papers_dir.mkdir(parents=True)
+    f = papers_dir / "draft.md"
+    f.write_text("Higgins JPT, Thomas J, eds. Cochrane Handbook v6.5.\n", encoding="utf-8")
+    assert find_violations([f], repo_root=tmp_path) == []
+
+
+def test_outside_papers_dir_still_blocks(tmp_path: Path) -> None:
+    other_dir = tmp_path / "site"
+    other_dir.mkdir()
+    f = other_dir / "index.html"
+    f.write_text("Cochrane reviews are great\n", encoding="utf-8")
+    assert len(find_violations([f], repo_root=tmp_path)) == 1

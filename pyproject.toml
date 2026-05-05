@@ -25,6 +25,7 @@ tiba-build-index = "tiba.generator.build_index:main"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+pythonpath = ["."]
 addopts = "-q --strict-markers"
 markers = [
     "network: tests that hit the real internet (skip in CI offline mode)",
