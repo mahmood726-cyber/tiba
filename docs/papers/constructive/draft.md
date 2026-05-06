@@ -498,7 +498,7 @@ The following ten criteria must all be true before the v0.1.0 tag is applied. Re
 | (c) | Index page Pages-live at `mahmood726-cyber.github.io/tiba/` | HTTP 200 + visual smoke test |
 | (d) | `MANIFESTO.md` committed | File exists in `main`, ≤1 page rendered |
 | (e) | `tiba.yaml` JSON schema committed at `schema/tiba.yaml.schema.json` | Schema validates against a sample manifest |
-| (f) | Sentinel: 0 BLOCK on the meta-repo | `python -m sentinel scan --repo C:\Projects\tiba` |
+| (f) | Sentinel: 0 BLOCK on the meta-repo | `python -m sentinel scan --repo <tiba-repo-root>` |
 | (g) | ≥3 of the 5 operational repos have committed `tiba.yaml` | CI federation scan returns ≥3 manifests |
 | (h) | Makerere PI(s) nominated and added to author list | Edit to `docs/papers/*/draft.md` author block |
 | (i) | E156 workbook entry created (both papers as one entry under "framework") | Entry visible in `C:\E156\rewrite-workbook.txt` |

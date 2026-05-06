@@ -21,3 +21,6 @@ STUCK_FAILURES.jsonl
 .tiba_cache/
 dist/
 build/
+sentinel-findings.sarif
+review-findings.md
+review-findings.jsonl
