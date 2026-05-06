@@ -130,11 +130,12 @@ The `layer` field is a closed enum of 8 values matching §4. New layers require 
 
 ## 6. Authorship & governance
 
-- **First / corresponding author (both papers):** mahmood726-cyber (Mahmood). Tiba is *not* an E156 micro-paper; the E156 middle-author-only rule (`feedback_e156_authorship.md`) does not apply.
-- **Co-authors:** Makerere PI(s), **TBD — locked at draft-2.** Spec ships with this blank; ship of v0.1.0 (per acceptance criterion h, §7) gated on the blank being filled.
+- **First / corresponding author (both papers):** Mahmood Ahmad (mahmood726-cyber). Tiba is *not* an E156 micro-paper; the E156 middle-author-only rule (`feedback_e156_authorship.md`) does not apply.
+- **Uganda / Makerere PI (v0.1.0):** Mahmood Ahmad — already an insider at Makerere University (per memory: 190-students/week teaching cohort), serves as the Uganda PI for the v0.1.0 framework declaration. Resolves D1 (§10).
+- **Additional Makerere co-PIs (v0.2):** explicitly carved out for v0.2 — broaden the African-PI roster beyond a single insider to formalise plural African leadership consistent with the "Pan-African, African-led" framing. v0.2 nominations to be added before any production-pipeline work (Workforce activation layer).
 - **Acknowledged:** ARAC contributors, PACTR Hiddenness Atlas contributors, any Synthesis Courses contributors whose material is referenced.
 - **Synthēsis editorial COI:** clean. Mahmood left the Synthēsis editorial board on 2026-04-20 (per `feedback_e156_authorship.md`).
-- **Steward model:** Mahmood as v0.1.0 steward. After Makerere PI nomination (v0.2), governance becomes co-stewardship. Affiliated repos retain full local autonomy — Tiba imposes the manifest schema, not project rules.
+- **Steward model:** Mahmood as v0.1.0 steward AND Uganda PI. After v0.2 additional Makerere co-PI nominations, governance becomes co-stewardship. Affiliated repos retain full local autonomy — Tiba imposes the manifest schema, not project rules.
 
 ---
 
@@ -187,7 +188,7 @@ All ten must be true before v0.1.0 is tagged.
 
 | # | Decision | Default if not resolved |
 |---|---|---|
-| D1 | Makerere PI nominations | Spec ships with blank; user resolves before draft-2 |
+| D1 | ~~Makerere PI nominations~~ **RESOLVED 2026-05-06**: Mahmood Ahmad serves as Uganda/Makerere PI for v0.1.0 (insider at Makerere University). Additional Makerere co-PIs carved out for v0.2 (Workforce activation layer). | n/a — resolved |
 | D2 | Constructive paper target journal: BMJ Methods vs JCE vs preprint-only | Default: Zenodo preprint at v0.1.0; journal target chosen at draft-2 |
 | D3 | Site generator language: Python vs Node | Default: Python (matches portfolio default and existing toolchain) |
 | D4 | African-priority condition for v0.3 living-MA pilot | Defer to v0.3 spec |
