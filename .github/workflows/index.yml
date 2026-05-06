@@ -4,12 +4,19 @@ on:
   push:
     branches: [main]
   schedule:
-    # Re-verify federation HTTP-200 status weekly (R2 long-term mitigation)
-    - cron: "0 6 * * 1"
+    # Re-verify federation HTTP-200 status hourly so federation tiba.yaml updates
+    # in affiliated repos propagate within ~1h without manual workflow_dispatch.
+    # (R2 long-term mitigation; tightened from weekly→hourly in v0.1.x hygiene.)
+    - cron: "5 * * * *"
   workflow_dispatch:
 
 permissions:
   contents: write
+
+env:
+  # Opt-in to Node 24 ahead of GitHub's June 2026 forced migration.
+  # Tested working with actions/checkout@v4 + actions/setup-python@v5.
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
 
 jobs:
   build:
