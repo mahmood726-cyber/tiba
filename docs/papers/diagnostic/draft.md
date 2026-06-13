@@ -34,7 +34,7 @@ Tiba (Swahili: *healing*) is a federation of African-led evidence-synthesis proj
 2. Ahmad M. African Representation Atlas of Cochrane (ARAC) v0.1.1. github.com/mahmood726-cyber/arac. 2026.
 3. Ahmad M. Tiba framework — constructive companion. Zenodo preprint, 2026 (DOI at deposit).
 4. Pan-African Clinical Trials Registry. https://pactr.samrc.ac.za. Accessed 2026-05-06.
-5. Page MJ, McKenzie JE, Bossuyt PM, et al. The PRISMA 2020 statement: an updated guideline for reporting systematic reviews. BMJ 2021;372:n71.
+5. Page MJ, McKenzie JE, Bossuyt PM, et al. The PRISMA 2020 statement: an updated guideline for reporting systematic reviews. BMJ 2021;372:n71. doi:10.1136/bmj.n71
 6. Higgins JPT, Thomas J, eds. Cochrane Handbook for Systematic Reviews of Interventions v6.5. Cochrane, 2024.
 7. Open Timestamps. https://opentimestamps.org. Accessed 2026-05-06.
 8. Wilson EB. Probable inference, the law of succession, and statistical inference. J Am Stat Assoc 1927;22:209–212.
